@@ -1,3 +1,5 @@
+import App from '../components/App.jsx';
+
 let groceriesData = [
   {
     name: "apples",
