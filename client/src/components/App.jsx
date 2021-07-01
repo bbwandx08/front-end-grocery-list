@@ -2,6 +2,7 @@ import React from 'react';
 
 import groceriesData from '../data/groceriesData.js';
 import GroceryList from './GroceryList.jsx';
+import GroceryItem from './GroceryItem.jsx';
 
 
 class App extends React.Component {
@@ -9,26 +10,59 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-
+      groceries: groceriesData,
+      itemName: '',
+      quantity: ''
     };
 
+    this.updateList = this.updateList.bind(this);
+    this.submitList = this.submitList.bind(this);
   }
+
+  updateList(e) {
+    this.setState({[e.target.name]: e.target.value});
+  }
+
+  submitList(e) {
+    e.preventDefault();
+    var newItem = {
+      name: this.state.itemName,
+      quantity: this.state.quantity
+    }
+
+    this.setState({
+      groceries: [...this.state.groceries, newItem],
+      itemName: '',
+      quantity: ''
+    })
+  }
+
 
   render() {
     return (
   <div>
     <img src="grocery-bags.png" />
     <h1>Grocery List</h1>
-    <form>
+    <form onSubmit={this.submitList}>
       <label> Item
-        <input name="item" value="" />
+        <input
+        name="itemName"
+        value={this.state.itemName}
+        onChange={this.updateList}
+        />
       </label>
+
       <label> Quantity
-        <input name="quantity" value="" />
+        <input
+          name="quantity"
+          value={this.state.quantity}
+          onChange={this.updateList}
+          />
       </label>
+
       <button>Add Grocery</button>
       <ul className="groceries">
-        <GroceryList list={groceriesData} />
+        <GroceryList list={this.state.groceries} />
 
       </ul>
     </form>
