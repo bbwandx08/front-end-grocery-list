@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      groceries: groceriesData,
+      someGrocery: groceriesData,
       itemName: '',
       quantity: ''
     };
@@ -31,7 +31,7 @@ class App extends React.Component {
     }
 
     this.setState({
-      groceries: [...this.state.groceries, newItem],
+      someGrocery: [...this.state.someGrocery, newItem],
       itemName: '',
       quantity: ''
     })
@@ -62,7 +62,7 @@ class App extends React.Component {
 
       <button>Add Grocery</button>
       <ul className="groceries">
-        <GroceryList list={this.state.groceries} />
+        <GroceryList list={this.state.someGrocery} />
 
       </ul>
     </form>
